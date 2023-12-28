@@ -1,11 +1,15 @@
 package Repository;
 import Domain.Entity;
 import org.sqlite.SQLiteDataSource;
+import org.w3c.dom.ls.LSOutput;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 
 public abstract class DbRepo<T extends Entity> extends Repo<T> {
-    private String JDBC_URL = "jdbc:sqlite:/home/victor/Info/An2/MAP/JavaFXPatientsManagement/patientsAndAppointments.sqlite";
+    Path basePath = Paths.get(System.getProperty("user.dir"));
+    private String JDBC_URL = "jdbc:sqlite:" + basePath + "/patientsAndAppointments.sqlite";
     Connection connection;
 
     public DbRepo() {
