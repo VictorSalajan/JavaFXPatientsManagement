@@ -275,15 +275,6 @@ public class HelloApplication extends Application {
         stage.setTitle("Patients and Appointments");
         stage.setScene(scene);
         stage.show();
-
-//        if (!stage.isShowing()) {
-//            try {
-//                patientRepo.closeConnection();
-//                appointmentRepo.closeConnection();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
 
     /**

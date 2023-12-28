@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Stream;
 
 
 public class AppointmentService {
@@ -72,7 +71,7 @@ public class AppointmentService {
     /**
      * Update an Appointment by ID
      * @param newApp: Appointment
-     * @throws IdNotFoundException
+     * @throws IdNotFoundException: RepoException, ValidationError
      */
     public void update(Appointment newApp) throws RepoException, ValidationError {
         if (newApp.getPacient() == null) {

@@ -27,8 +27,6 @@ public class Main {
         } catch (RepoException | IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
-
-//        repo.closeConnection();
     }
 
     public static ArrayList<Object> initializeApp() throws IOException, RepoException, ClassNotFoundException {
