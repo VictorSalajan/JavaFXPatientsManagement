@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Console {
@@ -132,15 +134,30 @@ public class Console {
     }
 
     public void getAppointmentsByPatient() {
-        appointmentService.getAppointmentsByPatient();
+        List<Map.Entry<Patient, Integer>> sortedList = appointmentService.getAppointmentsByPatient();
+        for (Map.Entry<Patient, Integer> entry : sortedList) {
+            Patient patient = entry.getKey();
+            int appointmentCount = entry.getValue();
+            System.out.println(patient.toString() + ": " + appointmentCount + " appointment(s)");
+        }
     }
 
     public void getAppointmentsByMonth() {
-        appointmentService.getAppointmentsByMonth();
+        List<Map.Entry<String, Integer>> sortedList = appointmentService.getAppointmentsByMonth();
+        for (Map.Entry<String, Integer> entry : sortedList) {
+            String month = entry.getKey();
+            int appointmentCount = entry.getValue();
+            System.out.println(month + ": " + appointmentCount + " appointment(s)");
+        }
     }
 
     public void daysSinceLastAppointment() {
-        appointmentService.daysSinceLastAppointment();
+        List<Map.Entry<Patient, Integer>> sortedList = appointmentService.daysSinceLastAppointment();
+        for (Map.Entry<Patient, Integer> entry : sortedList) {
+            Patient p = entry.getKey();
+            int nrDays = entry.getValue();
+            System.out.println(p.toString() + ": " + nrDays + " passed since last appointment");
+        }
     }
 
     public void printMenu() {
@@ -159,16 +176,15 @@ public class Console {
 
         System.out.println("-1. Exit");
 
+        System.out.print("Choose an option: ");
     }
 
     public void menu() throws RepoException {
         outer: while (true) {
             this.printMenu();
-            System.out.print("Choose an option: ");
-            Scanner scan = new Scanner(System.in);
             int option = 0;
             try {
-                option = Integer.parseInt(scan.nextLine());
+                option = Integer.parseInt(in.nextLine());
             } catch (NumberFormatException ex) {
                 System.out.println(ex);
             }

@@ -10,6 +10,7 @@ import Repository.RepoException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 
@@ -90,7 +91,7 @@ public class AppointmentService {
         appointmentRepo.deleteById(ID);
     }
 
-    public void getAppointmentsByPatient() {
+    public List<Map.Entry<Patient, Integer>> getAppointmentsByPatient() {
         ArrayList<Appointment> appList = getAll();
         Map<Patient, Integer> patientsMap = new HashMap<>();
         for (Appointment appointment : appList) {
@@ -100,14 +101,10 @@ public class AppointmentService {
 
         List<Map.Entry<Patient, Integer>> sortedList = new ArrayList<>(patientsMap.entrySet());
         sortedList.sort(Map.Entry.<Patient, Integer>comparingByValue().reversed());
-        for (Map.Entry<Patient, Integer> entry : sortedList) {
-            Patient patient = entry.getKey();
-            int appointmentCount = entry.getValue();
-            System.out.println(patient.toString() + ": " + appointmentCount + " appointment(s)");
-        }
+        return sortedList;
     }
 
-    public void getAppointmentsByMonth() {
+    public List<Map.Entry<String, Integer>> getAppointmentsByMonth() {
         ArrayList<Appointment> appList = getAll();
         Map<String, Integer> appsByMonthMap = new HashMap<>();
         for (Appointment appointment : appList) {
@@ -117,30 +114,22 @@ public class AppointmentService {
 
         List<Map.Entry<String, Integer>> sortedList = new ArrayList<>(appsByMonthMap.entrySet());
         sortedList.sort(Map.Entry.<String, Integer>comparingByValue().reversed());
-        for (Map.Entry<String, Integer> entry : sortedList) {
-            String month = entry.getKey();
-            int appointmentCount = entry.getValue();
-            System.out.println(month + ": " + appointmentCount + " appointment(s)");
-        }
+        return sortedList;
     }
 
-    public void daysSinceLastAppointment() {
+    public List<Map.Entry<Patient, Integer>> daysSinceLastAppointment() {
         ArrayList<Appointment> appList = getAll();
         Map<Patient, Integer> daysPassedByPatient = new HashMap<>();
         for (Appointment appointment : appList) {
             Patient patient = appointment.getPacient();
-            Integer crtLatestDay = daysPassedByPatient.getOrDefault(patient, 0);
-            Integer newDay = appointment.getDate().getDayOfYear();
-            if (newDay > crtLatestDay)
-                daysPassedByPatient.put(patient, newDay);
+            Integer crtDaysPassed = daysPassedByPatient.getOrDefault(patient, Integer.MAX_VALUE);
+            Integer newDaysPassed = Math.toIntExact(ChronoUnit.DAYS.between(appointment.getDate(), LocalDate.now()));
+            if (newDaysPassed < crtDaysPassed)
+                daysPassedByPatient.put(patient, newDaysPassed);    // found a more recent appointment for crt patient
         }
 
         List<Map.Entry<Patient, Integer>> sortedList = new ArrayList<>(daysPassedByPatient.entrySet());
         sortedList.sort(Map.Entry.<Patient, Integer>comparingByValue().reversed());
-        for (Map.Entry<Patient, Integer> entry : sortedList) {
-            Patient p = entry.getKey();
-            int nrDays = entry.getValue();
-            System.out.println(p.toString() + ": " + nrDays + " passed since last appointment");
-        }
+        return sortedList;
     }
 }

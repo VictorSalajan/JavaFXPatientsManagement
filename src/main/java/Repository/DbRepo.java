@@ -22,9 +22,8 @@ public abstract class DbRepo<T extends Entity> extends Repo<T> {
         ds.setUrl(JDBC_URL);
 
         try {
-            if (connection == null || connection.isClosed()) {
+            if (connection == null || connection.isClosed())
                 connection = ds.getConnection();
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
