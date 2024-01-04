@@ -17,12 +17,12 @@ public class AppointmentValidator {
         LocalDate appToAddDate = app.getDate();
         LocalTime appToAddtime = app.getTime();
         LocalDateTime appToAddDateTime = LocalDateTime.of(appToAddDate, appToAddtime);
+        if (appToAddDateTime.getYear() > 2024)
+            errors.add("Appointment cannot be further in the future than 2024!");
+        if (app.getPurpose() == "")
+            errors.add("Appointment purpose cannot be null!");
         while (appIter.hasNext()) {
             Appointment nextApp = appIter.next();
-            if (appToAddDateTime.getYear() > 2024)
-                errors.add("Appointment cannot be further in the future than 2024!");
-            if (app.getPurpose() == "")
-                errors.add("Appointment purpose cannot be null!");
             if (app.equals(nextApp)) {
                 continue;               // when updating: do not evaluate overlap with itself
             }
