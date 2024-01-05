@@ -1,16 +1,193 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.javafxa4.HelloController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
-
-  <Label fx:id="welcomeText"/>
-  <Button text="Hello!" onAction="#onHelloButtonClick"/>
+   <children>
+      <ListView fx:id="patientsListView" onMouseClicked="#onPatientsListViewClicked" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="appointmentsListView" onMouseClicked="#onAppointmentsListViewClicked" prefHeight="200.0" prefWidth="200.0" />
+      <HBox prefHeight="20.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" maxWidth="600.0" minWidth="274.0" prefHeight="16.0" prefWidth="274.0" text="Patient" />
+            <Label alignment="CENTER" prefHeight="16.0" prefWidth="944.0" text="Appointment" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="1200.0">
+         <children>
+            <GridPane prefHeight="104.0" prefWidth="600.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="0.0" prefWidth="0.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="219.0" minWidth="48.0" prefWidth="219.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="ID">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="lastName" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="firstName" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="age" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" right="30.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="patientIdTextField" prefWidth="112.0" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="patientLastNameTextField" prefHeight="24.0" prefWidth="56.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="patientFirstNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="patientAgeTextField" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+               </children>
+            </GridPane>
+            <GridPane prefHeight="100.0" prefWidth="332.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.0" minWidth="10.0" prefWidth="94.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="511.0" minWidth="10.0" prefWidth="219.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="ID">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="PatientID" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="date" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="time" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="purpose" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="appointmentIdTextField" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="appointmentPatientIdTextField" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="appointmentDateTextField" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="appointmentTimeTextField" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField fx:id="appointmentPurposeTextField" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
+      <HBox>
+         <children>
+            <HBox maxWidth="600.0" prefHeight="24.0" prefWidth="599.0">
+               <children>
+                  <Button fx:id="addPatientButton" mnemonicParsing="false" onMouseClicked="#onAddPatientClicked" text="Add">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="updatePatientButton" mnemonicParsing="false" onMouseClicked="#onUpdatePatientClicked" text="Update">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="deletePatientButton" mnemonicParsing="false" onMouseClicked="#onDeletePatientClicked" text="Delete">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox maxWidth="600.0">
+               <children>
+                  <Button fx:id="addAppointmentButton" mnemonicParsing="false" onMouseClicked="#onAddAppointmentClicked" text="Add">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="updateAppointmentButton" mnemonicParsing="false" onMouseClicked="#onUpdateAppointmentClicked" prefHeight="24.0" prefWidth="72.0" text="Update">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="deleteAppointmentButton" mnemonicParsing="false" onMouseClicked="#onDeleteAppointmentClicked" text="Delete">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </children>
 </VBox>
